@@ -1,0 +1,219 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Hugo: Making Building Websites Fun Again</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/moon.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h2>Hugo: Making Building Websites Fun Again</h2>
+					</hr>
+					<h5>Alex Juarez - LinuxFest Northwest 2019</h5>
+				</section>
+				<section>
+				<h2>Agenda</h2>
+					<ul>
+						<li>What and Why of Hugo?</li>
+						<li>Let's Install Hugo</li>
+						<li>Let's Make a Website</li>
+						<li>Content Mangement</li>
+						<li>Let's Get Dynamic</li>
+						<li>Hosting Your Site</li>
+						<li>Okay, So Now What? - Past Day 1</li>
+						<li>Review, Closnig &amp; Wrap Up</li>
+					</ul>
+				</section>
+				<section>
+					<h2>What is Hugo?</h2>
+					<blockquote>
+						Hugo is a fast and modern static site generator written in Go, and designed to make website creation fun again.<br/>
+						<a href="https://gohugo.io/about/what-is-hugo/" target="_blank">https://gohugo.io/about/what-is-hugo/</a>
+					</blockquote>
+				</section>
+				<section>
+				<h2>Why Hugo?</h2>
+					<p>Sometimes I just want to tinker and make a website. It reminded me of when I started making websites and the coolest thing write Guestbook with Perl on GeoCities.</p>
+					<p>Other Reasons:</p>
+						<ul>
+							<li>I was able to pick it up quickly</li>
+							<li>It supported Markdown</li>
+							<li>I wanted to learn Go</li>
+						</ul>
+				</section>
+				<section>
+				<h2>Hugo Resources</h2>
+				<ul>
+					<li>Main Website<br/><a href="https://gohugo.io" target="_blank">https://gohugo.io</a></li>
+					<li>Documentation<br/><a href="https://gohugo.io/documentation/" target="_blank">https://gohugo.io/documentation/</a></li>
+					<li>GitHub Page<br/><a href="https://github.com/gohugoio/hugo" target="_blank">https://github.com/gohugoio/hugo</a></li>
+				</ul>
+				</section>
+				<section>
+					<h2>Installing Hugo</h2>
+						<ul>
+							<li>Installing via Brew (macOS)</li>
+							<li>Installing via a Binary Release</li>
+						</ul>
+				</section>
+				<section>
+				<h2>Installing Hugo on Ubuntu 16.04</h2>
+				<ul>
+					<li>Install via the GitHub Releases Page</li>
+					<li>Do NOT Install from the Apt Sources - It's Old</li>
+				</ul>
+				</section>
+				<section>
+				<h2>Installing Hugo on Ubuntu 16.04</h2>
+				<p>Hugo Releases <a href="https://github.com/gohugoio/hugo/releases" target="_blank">https://github.com/gohugoio/hugo/releases</a>
+				<pre><code># wget -O /root/hugo.deb &lt;HUGO-RELEASE-URL&gt;
+# dpkg -i /root/hugo.deb</code></pre>
+				</section>
+				<section>
+				<h2>Checkpoint Slide</h2>
+				<p>Let's Verify Hugo is installed</p>
+				<pre><code># hugo version
+Hugo Static Site Generator v0.55.3-993B8433 linux/amd64...</code></pre>
+				</section>
+				<section>
+				<h2>Let's Make a Website</h2>
+					<ul>
+						<li>Our First Site!</li>
+						<li>The Directory Structure</li>
+						<li>What's Happening</li>
+					</ul>
+				</section>
+				<section>
+				<h2>Our First Site! - Pre Reqs</h2>
+				<p>In order to create our first site, we need to determine where to place it and install a few pre-reqs.</p>
+				<ul>
+					<li>Install both Apache2 and Git</li>
+					<li>Our site will be created under /var/www/html</li>
+				</ul>
+				</section>
+				<section>
+				<h2>Our First Site!</h2>
+				<pre><code>root@ubuntu-xenial:/var/www/html# hugo new site mysite</code></pre>
+				<small>
+				<p>Congratulations! Your new Hugo site is created in /var/www/html/mysite.</p>
+
+				<p>Just a few more steps and you're ready to go:</p>
+					<ol>
+						<li>Download a theme into the same-named folder.
+				   Choose a theme from https://themes.gohugo.io/, or
+				   create your own with the "hugo new theme &lt;THEMENAME&gt;" command.</li>
+					 <li>Perhaps you want to add some content. You can add single files
+				   with "hugo new &lt;SECTIONNAME&gt;/&lt;FILENAME&gt;.&lt;FORMAT&gt;".</li>
+					 <li>Start the built-in live server via "hugo server".</li>
+				 </ol>
+				<p>Visit https://gohugo.io/ for quickstart guide and full documentation.</p></small>
+				</section>
+
+				<section>
+				<h2>Installing a Theme</h2>
+				<p>Installing a theme can be completed in three steps. We'll dig further into themes in a later section.</p>
+				<pre><code># cd /var/www/html/mysite
+# git init
+# git submodule add \
+https://github.com/budparr/gohugo-theme-ananke.git themes/ananke
+# echo 'theme = "ananke"' >> config.toml</code></pre>
+				</section>
+
+				<section>
+				<h2>Create a First Post</h2>
+				<p>We can create a new post through the hugo cli command. Afterwards, edit the file to include content.</p>
+				<pre><code data-trim data-noescape># hugo new posts/my-first-post.md
+/var/www/html/mysite/content/posts/my-first-post.md created</code></pre>
+				</section>
+
+				<section>
+				<h2>Start the Built In Server</h2>
+				<p>Hugo has a built-in server that runs on port 1313. We add the "-D" flag so we build documents in a draft status.</p>
+				<pre><code data-trim data-noescape># hugo server -D</code></pre>
+				<p>It is possible to configure which interface Hugo will bind to when running its server</p>
+				<pre><code data-trim data-noescape># hugo server --bind $(hostname -I) -D</code></pre>
+				</section>
+
+				<section>
+				<h2>Closer Look - Server Output</h2>
+<pre><code data-trim data-noescape data-line-numbers="1,2">Watching for changes in /var/www/html/mysite/{content,data,layouts,static,themes}
+Watching for config changes in /var/www/html/mysite/config.toml
+Environment: "development"
+Serving pages from memory
+Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+Web Server is available at http://localhost:1313/ (bind address 10.0.2.15)
+Press Ctrl+C to stop</code></pre>
+				</section>
+
+				<section>
+				<h2>Check Point Slide</h2>
+				<p>Browsing to <a href="http://localhost:1313" target="_blank">http://localhost:1313</a> should bring up our brand new website.</p>
+				</section>
+
+				<section>
+				<h2>Content Mangement</h2>
+					<ul>
+						<li>Markdown Primer</li>
+						<li>Creating Content</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Let's Get Dyanamic</h2>
+						<ul>
+							<li>Hugo Functions</li>
+							<li>Hugo Variables</li>
+						</ul>
+				</section>
+				<section>
+				<h2>Hosting Your Site</h2>
+				</section>
+				<section>
+					<h2>Getting Past Day 1</h2>
+						<ul>
+							<li>Hugo Themes</li>
+							<li>Troubleshooting</li>
+							<li>Updating Hugo</li>
+						</ul>
+				</section>
+				<section>
+				<h2>Review, Closing &amp; Wrap Up</h2>
+			</section>
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
