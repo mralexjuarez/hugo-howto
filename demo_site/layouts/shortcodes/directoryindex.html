@@ -1,0 +1,15 @@
+{{- $pathURL := .Get "pathURL" -}}
+{{- $path := .Get "path" -}}
+{{- $files := readDir $path -}}
+
+<ul>
+  {{- range $files }}
+
+  {{- /* Using the print statement to build out the path to easy-name */ -}}
+  {{- /* The easy-name file is a place to put a more readable presentation name. */ -}}
+
+    {{ $easyName := (print $path "/" .Name  "/easy-name" ) | readFile | safeHTML }}
+    <li><a href="{{ $pathURL }}{{ .Name | relURL }}" target="_blank">{{ $easyName }}</a></li>
+
+  {{- end }}
+</ul>
