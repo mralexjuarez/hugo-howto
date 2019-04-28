@@ -38,8 +38,8 @@
 						<li>Let's Make a Website</li>
 						<li>Content Mangement</li>
 						<li>Let's Get Dynamic</li>
-						<li>Hosting Your Site</li>
 						<li>Okay, So Now What? - Past Day 1</li>
+						<li>Hosting Your Site</li>
 						<li>Review, Closnig &amp; Wrap Up</li>
 					</ul>
 				</section>
@@ -76,22 +76,27 @@
 						</ul>
 				</section>
 				<section>
-				<h2>Installing Hugo on Ubuntu 16.04</h2>
+				<h2>Installing via Brew</h2>
+				<p>If you are installing on a Mac, it's pretty easy.</p>
+				<pre><code data-notrim data-noescape class="bash"># brew install hugo</code>
+				</section>
+				<section>
+				<h2>Installing Hugo on Ubuntu 18.04</h2>
 				<ul>
 					<li>Install via the GitHub Releases Page</li>
 					<li>Do NOT Install from the Apt Sources - It's Old</li>
 				</ul>
 				</section>
 				<section>
-				<h2>Installing Hugo on Ubuntu 16.04</h2>
+				<h2>Installing Hugo on Ubuntu 18.04</h2>
 				<p>Hugo Releases <a href="https://github.com/gohugoio/hugo/releases" target="_blank">https://github.com/gohugoio/hugo/releases</a>
-				<pre><code># wget -O /root/hugo.deb &lt;HUGO-RELEASE-URL&gt;
+				<pre><code class="bash"># wget -O /root/hugo.deb &lt;HUGO-RELEASE-URL&gt;
 # dpkg -i /root/hugo.deb</code></pre>
 				</section>
 				<section>
 				<h2>Checkpoint Slide</h2>
 				<p>Let's Verify Hugo is installed</p>
-				<pre><code># hugo version
+				<pre><code class="bash"># hugo version
 Hugo Static Site Generator v0.55.3-993B8433 linux/amd64...</code></pre>
 				</section>
 				<section>
@@ -99,11 +104,11 @@ Hugo Static Site Generator v0.55.3-993B8433 linux/amd64...</code></pre>
 					<ul>
 						<li>Our First Site!</li>
 						<li>The Directory Structure</li>
-						<li>What's Happening</li>
+						<li>Hugo's Lookup Order</li>
 					</ul>
 				</section>
 				<section>
-				<h2>Our First Site! - Pre Reqs</h2>
+				<h2>Pre-Reqs</h2>
 				<p>In order to create our first site, we need to determine where to place it and install a few pre-reqs.</p>
 				<ul>
 					<li>Install both Apache2 and Git</li>
@@ -112,7 +117,7 @@ Hugo Static Site Generator v0.55.3-993B8433 linux/amd64...</code></pre>
 				</section>
 				<section>
 				<h2>Our First Site!</h2>
-				<pre><code>root@ubuntu-xenial:/var/www/html# hugo new site mysite</code></pre>
+				<pre><code class="bash">root@ubuntu-xenial:/var/www/html# hugo new site mysite</code></pre>
 				<small>
 				<p>Congratulations! Your new Hugo site is created in /var/www/html/mysite.</p>
 
@@ -131,31 +136,31 @@ Hugo Static Site Generator v0.55.3-993B8433 linux/amd64...</code></pre>
 				<section>
 				<h2>Installing a Theme</h2>
 				<p>Installing a theme can be completed in three steps. We'll dig further into themes in a later section.</p>
-				<pre><code># cd /var/www/html/mysite
-# git init
-# git submodule add \
+				<pre><code class="bash">cd /var/www/html/mysite
+git init
+git submodule add \
 https://github.com/budparr/gohugo-theme-ananke.git themes/ananke
-# echo 'theme = "ananke"' >> config.toml</code></pre>
+echo 'theme = "ananke"' >> config.toml</code></pre>
 				</section>
 
 				<section>
 				<h2>Create a First Post</h2>
 				<p>We can create a new post through the hugo cli command. Afterwards, edit the file to include content.</p>
-				<pre><code data-trim data-noescape># hugo new posts/my-first-post.md
+				<pre><code class="bash" data-trim data-noescape># hugo new posts/my-first-post.md
 /var/www/html/mysite/content/posts/my-first-post.md created</code></pre>
 				</section>
 
 				<section>
 				<h2>Start the Built In Server</h2>
 				<p>Hugo has a built-in server that runs on port 1313. We add the "-D" flag so we build documents in a draft status.</p>
-				<pre><code data-trim data-noescape># hugo server -D</code></pre>
+				<pre><code class="bash" data-trim data-noescape># hugo server -D</code></pre>
 				<p>It is possible to configure which interface Hugo will bind to when running its server</p>
-				<pre><code data-trim data-noescape># hugo server --bind $(hostname -I) -D</code></pre>
+				<pre><code class="bash" data-trim data-noescape># hugo server --bind $(hostname -I) -D</code></pre>
 				</section>
 
 				<section>
 				<h2>Closer Look - Server Output</h2>
-<pre><code data-trim data-noescape data-line-numbers="1,2">Watching for changes in /var/www/html/mysite/{content,data,layouts,static,themes}
+<pre><code class="bash" data-trim data-noescape data-line-numbers="1,2">Watching for changes in /var/www/html/mysite/{content,data,layouts,static,themes}
 Watching for config changes in /var/www/html/mysite/config.toml
 Environment: "development"
 Serving pages from memory
@@ -170,12 +175,117 @@ Press Ctrl+C to stop</code></pre>
 				</section>
 
 				<section>
+				<h2>The Directory Structure</h2>
+				<pre><code data-trim data-noescape class="bash"># ls -1
+archetypes
+config.toml
+content
+data
+layouts
+static
+themes</code></pre>
+				</section>
+
+				<section>
+				<h2>archetypes</h2>
+				<p>
+					Content file types are stored in this directory. Viewing the default.md files gives us an example of an archetype in action.
+			  </p>
+				</section>
+
+				<section>
+				<h2>config.toml / config</h2>
+				<p>The default configuration is config.toml, but as we get more in-depth with our Hugo use, there may come at time where might need a stating and production configuration. Creating multiple files in a config directory is how we would do this.</p>
+				</section>
+
+				<section>
+				<h2>content</h2>
+				<p>This is where the content for your website will live.</p>
+				</section>
+
+				<section>
+				<h2>data</h2>
+				<p>The data directory stores configuration files. For our examples these files will be essentialy datasets which will be used to generate lists in our HTML.</p>
+				</section>
+
+				<section>
+				<h2>layouts</h2>
+				<p>Stores HTML templates to outline how content will be rendered.</p>
+				<p>Some types of layouts</p>
+				<ul>
+					<li>list pages</li>
+					<li>the homepage</li>
+					<li>partials</li>
+					<li>single page templates</li>
+				</ul>
+				</section>
+
+				<section>
+				<h2>static</h2>
+				<p>A place for all your static content e.g. stylesheets, JavaScript, images etc.</p>
+				</section>
+
+				<section>
+				<h2>themes</h2>
+				<p>The default directory to store themes.</p>
+				</section>
+
+				<section>
 				<h2>Content Mangement</h2>
 					<ul>
 						<li>Markdown Primer</li>
 						<li>Creating Content</li>
 					</ul>
 				</section>
+
+				<section>
+				<h2>Markdown Primer</h2>
+				<p>Markdown allows one to easily write a well formatted document which can be converted to HTML or read alone in plain text.</p>
+				</section>
+
+				<section>
+				<h2>Markdown Headers</h2>
+				<table>
+					<tr>
+						<td>#</td><td>H1</td>
+					</tr>
+					<tr>
+						<td>##</td><td>H2</td>
+					</tr>
+					<tr>
+						<td>###</td><td>H3</td>
+					</tr>
+				</table>
+
+				</section>
+				<section>
+				<h2>Empahsis</h2>
+				<table>
+					<tr>
+						<td>*Something*</td><td>Bold</td>
+					</tr>
+					<tr>
+						<td>_Something_</td><td>Italics</td>
+					</tr>
+					<tr>
+						<td>~~Something~~</td><td>Strike Through</td>
+					</tr>
+				</table>
+				</section>
+
+				<section>
+				<h2>Lists</h2>
+				<table>
+					<tr>
+						<td>1. </td><td>First Orderd Item</td>
+					</tr>
+					<tr>
+						<td>*</td><td>Unordered Item</td>
+					</tr>
+				</table>
+				<p>With lists, indention can factor in to rendering</p>
+				</section>
+
 				<section>
 					<h2>Let's Get Dyanamic</h2>
 						<ul>
@@ -184,15 +294,33 @@ Press Ctrl+C to stop</code></pre>
 						</ul>
 				</section>
 				<section>
-				<h2>Hosting Your Site</h2>
-				</section>
-				<section>
-					<h2>Getting Past Day 1</h2>
+				<h2>Getting Past Day 1</h2>
 						<ul>
 							<li>Hugo Themes</li>
 							<li>Troubleshooting</li>
 							<li>Updating Hugo</li>
 						</ul>
+				</section>
+				<section>
+				<h2>Hugo Themes</h2>
+				</section>
+				<section>
+				<h2>Hugo's Lookup Order</h2>
+				<p>Starting from most specific, Hugo tries to make a guess on which laytout to user when styling a page.</p>
+				<a href="https://gohugo.io/templates/lookup-order/" target="_blank">https://gohugo.io/templates/lookup-order/</a>
+				</section>
+				<section>
+				<h2>Troubleshooting</h2>
+				</section>
+				<section>
+				<h2>Updating Hugo</h2>
+				</section>
+				<section>
+				<h2>Content Mangement</h2>
+					<ul>
+						<li>Markdown Primer</li>
+						<li>Creating Content</li>
+					</ul>
 				</section>
 				<section>
 				<h2>Review, Closing &amp; Wrap Up</h2>
