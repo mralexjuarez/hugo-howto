@@ -1,0 +1,14 @@
+{{ define "main" }}
+
+<p>This page is a homepage {{ .IsHome }}</p>
+<p>This page is a {{ .Kind }} page</p>
+<p>The title is {{ $.Title }}</p>
+
+  <h1>Posts</h1>
+  {{ range .Pages }}
+    <article>
+      <h2><a href="{{ .RelPermalink }}" target="_blank">{{ .Title }}</a></h2>
+      {{ .Content }}
+    </article>
+  {{ end }}
+{{ end }}

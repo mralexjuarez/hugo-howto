@@ -1,0 +1,25 @@
+{{ define "main"}}
+
+  This is a single template.
+  <br/><br/>
+
+  <h2>{{ .Title }}</h2>
+
+  <p>This page is a homepage {{ .IsHome }}</p>
+  <p>This page is a {{ .Kind }} page</p>
+  <p>The title is {{ $.Title }}</p>
+
+  {{ .Content }}
+
+  {{ $geese := slice "John" "Jim" "Sarah" }}
+  {{ $geese := slice "John" }}
+  There is {{ len $geese }} {{ cond (eq (len $geese) 1) "goose" "geese" }}.
+  It's name is {{ index $geese 0 }}
+
+  <br/>
+
+
+  <small>Wordcount: {{ .Content | countwords }}</small>
+
+
+{{ end }}

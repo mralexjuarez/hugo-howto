@@ -37,7 +37,7 @@
 						<li>Let's Install Hugo</li>
 						<li>Let's Make a Website</li>
 						<li>Content Mangement</li>
-						<li>Let's Get Dynamic</li>
+						<li>Variables and Functions</li>
 						<li>Okay, So Now What? - Past Day 1</li>
 						<li>Hosting Your Site</li>
 						<li>Review, Closnig &amp; Wrap Up</li>
@@ -94,9 +94,9 @@
 # dpkg -i /root/hugo.deb</code></pre>
 				</section>
 				<section>
-				<h2>Checkpoint Slide</h2>
+				<h2>Check Point</h2>
 				<p>Let's Verify Hugo is installed</p>
-				<pre><code class="bash"># hugo version
+				<pre><code class="bash">$ hugo version
 Hugo Static Site Generator v0.55.3-993B8433 linux/amd64...</code></pre>
 				</section>
 				<section>
@@ -170,7 +170,7 @@ Press Ctrl+C to stop</code></pre>
 				</section>
 
 				<section>
-				<h2>Check Point Slide</h2>
+				<h2>Check Point - Is ther Server Up?</h2>
 				<p>Browsing to <a href="http://localhost:1313" target="_blank">http://localhost:1313</a> should bring up our brand new website.</p>
 				</section>
 
@@ -287,41 +287,266 @@ themes</code></pre>
 				</section>
 
 				<section>
-					<h2>Let's Get Dyanamic</h2>
+				<h2>Links</h2>
+				<table>
+					<tr>
+						<td>[I'm an inline-style link](https://www.google.com)</td><td>In-line Style</td>
+					</tr>
+					<tr>
+						<td>[You can use numbers for reference-style link definitions][1]
+</td><td>[1]</td>
+					</tr>
+				</table>
+				</section>
+
+
+				<section>
+				<h2>Check Point - Markdown Primer</h2>
+				<p>Use the next slide as a guide and try to write Markdown to match the provided HTML. The slide after that will have the expected Markdown.</p>
+				<p>You can use the online editor at <a href="https://dillinger.io/" target="_blank">https://dillinger.io/</a> </p>
+
+				</section>
+				<section>
+					<h1>This is an H1 Header</h1>
+					Some text will go here.
+
+					<h2>This is an H2 Header</h2>
+					<ul>
+						<li>Item 1</li>
+						<li>Item 2</li>
+							<li><ul>
+								<li>Sub-Item 1</li>
+								<li>Sub-Item 2</li>
+							</ul></li>
+						</ul>
+				</section>
+
+				<section>
+				<h2>The Markdown</h2>
+				<pre><code class="markdown"># This is an H1 Header
+
+Some text will go here.
+
+## This is an H2 Header
+
+* Item 1
+* Item 2
+  * Sub-Item 1
+  * Sub-Item 2</code></pre>
+				</section>
+				<section>
+				<h2>Creating Content</h2>
+				<p>It's time to start adding to our website.</p>
+				<p>Our goal is to learn by doing so we are going to create a website that will highlight some of the features of Hugo.</p>
+				</section>
+
+				<section>
+				<h2>Content Organization</h2>
+				<p>The Content directory is oganized in the way web content would be.</p>
+				<pre><code class="bash" style="float: left" data-noescape data-notrim >.
+└── content
+    └── about
+    |   └── _index.md  // -- https://example.com/about/
+    ├── posts
+    |   ├── firstpost.md   // -- https://example.com/posts/firstpost/
+    |   ├── happy
+    |   |   └── ness.md  // -- https://example.com/posts/happy/ness/
+    |   └── secondpost.md  // -- https://example.com/posts/secondpost/
+    └── quote
+        ├── first.md       // -- https://example.com/quote/first/
+        └── second.md      // -- https://example.com/quote/second/
+			</code></pre>
+
+				<small><a href="https://gohugo.io/content-management/organization/" target="_blank">https://gohugo.io/content-management/organization/</a></small>
+				</section>
+
+				<section>
+				<h2>hugo create</h2>
+				<p>The hugo command can be used to create new files</p>
+				<pre><code>hugo new content/posts/my-first-post.md</code></pre>
+				<p>http://localhost:1313/posts/my-first-post/</p>
+				<ul>
+					<li>Run hugo the base directory</li>
+					<li>If you mess up, you can remove the file.</li>
+				</ul>
+				</section>
+
+				<section>
+				<h2>Exercise - Organize Content</h2>
+				<p>How would we organize our files so that the following URL paths where established?</p>
+				<ul>
+					<li>/about/</li>
+					<li>/about/staff/</li>
+					<li>/about/staff/person{1,2,3,4}/</li>
+					<li>/blog/</li>
+				</ul>
+				</section>
+
+				<section>
+				<h2>Ansewr - Hugo Commands</h2>
+				<pre><code class="bash">$ hugo create content/about/staff/person1.md
+$ hugo create content/about/staff/person2.md
+$ hugo create content/about/staff/person3.md
+$ hugo create content/about/staff/person4.md
+$ hugo create content/blog</code></pre>
+				</section>
+
+				<section>
+				<h2>Check Point - Listing Drafts</h2>
+				<p>With the hugo cli you can list out articles in a draft status</p>
+				<pre><code class="bash">$ hugo list drafts
+about/staff/person4.md
+about/staff/person1.md
+about/staff/person2.md
+about/staff/person3.md
+about/_index.md
+blog/2019-04-28.md
+_index.md</code>
+				</section>
+
+				<section>
+				<h2>Single vs List Page/Templates</h2>
+				<p>The two major types of pages we are going to look at are single and list pages</p>
+				<ul>
+					<li>Single page - A file within a secton e.g. content/about/staff/person1.md</li>
+					<li>List page -  A directory with multiple files .e.g content/about/staff/</li>
+				</ul>
+				</section>
+
+				<section>
+				<h2>_index.md</h2>
+				<p>The _index.md file is special because it allows us to add Front Matter to our list pages.</p>
+				</section>
+
+				<section>
+				<h2>Front Matter</h2>
+				<p>Front matter is data about your flie i.e. metadata</p>
+				<table>
+					<tr><td>Format</td><td>Open / Close</td></tr>
+					<tr><td>YAML</td><td>---</td></tr>
+					<tr><td>TOML</td><td>+++</td></tr>
+					<tr><td>JSON</td><td>{}</td></tr>
+				</table>
+				<small><a href="https://gohugo.io/content-management/front-matter/" target="_blank">https://gohugo.io/content-management/front-matter/</a></small>
+				</section>
+
+				<section>
+				<h2>Font Matter - Example</h2>
+				<pre><code class="YAML">---
+title: "Person1"
+date: 2019-04-28T08:21:05-07:00
+draft: true
+---</code>
+				</section>
+
+				<section>
+					<h2>Templates, Variables and Functions</h2>
 						<ul>
-							<li>Hugo Functions</li>
+							<li>Templates</li>
 							<li>Hugo Variables</li>
+							<li>Hugo Functions</li>
 						</ul>
 				</section>
+
 				<section>
-				<h2>Getting Past Day 1</h2>
-						<ul>
-							<li>Hugo Themes</li>
-							<li>Troubleshooting</li>
-							<li>Updating Hugo</li>
-						</ul>
+				<h2>Templates</h2>
+				<p>When we added our theme, we add in some teplates so we can display the pages.</p>
+				<ul>
+					<li>HTML Templates with Variables and Functions</li>
+					<li>Override defaults from withing the layouts directory</li>
+					<li>Functions and Variables are accessible through {{ }}</li>
+				</ul>
 				</section>
-				<section>
-				<h2>Hugo Themes</h2>
-				</section>
+
 				<section>
 				<h2>Hugo's Lookup Order</h2>
 				<p>Starting from most specific, Hugo tries to make a guess on which laytout to user when styling a page.</p>
 				<a href="https://gohugo.io/templates/lookup-order/" target="_blank">https://gohugo.io/templates/lookup-order/</a>
 				</section>
+
 				<section>
-				<h2>Troubleshooting</h2>
+				<h2>Exercise - Custom Templates</h2>
+				<p>Let's a single.html and list.html to add/override to our default layout.</p>
+				<ol>
+					<li>Create layouts/_default/single.html and layouts/_default/list.html</li>
+					<li>Add content to each template .e.g "This is the single page."</li>
+				</ol>
+				</section>
+
+				<section>
+				<h2>Checkpoint - Updated Templates</h2>
+				<p>Let's check to make sure we are all on the same page and we can observe the page layout has been updated.</p>
+				</section>
+
+				<section>
+				<h2>Hugo Variables</h2>
+				<p>Hogo variables are accessible within the files in the layouts directory.</p>
+				<pre><code class="bash" data-trim data-line-numbers="3">This is a single template.
+<br/><br/>
+<h2>{{ .Title }}</h2></code></pre>
+				<small><a href="https://gohugo.io/variables/" target="_blank">https://gohugo.io/variables/</a></small>
+				</section>
+
+				<section>
+				<h2>Exercise - Exploring Variables</h2>
+				<p>Reference the <a href="https://gohugo.io/variables/" target="_blank">variables</a> page to see what types of variables are available.</p>
+				<ul>
+					<li>Add 3-4 varaibles to your page.</li>
+					<li>Examples might be: .Site.BaseURL, .Kind, .Content</li>
+				</ul>
+				<small><a href="https://gohugo.io/variables/" target="_blank">https://gohugo.io/variables/</a></small>
+				</section>
+
+				<section>
+				<h2>Hugo Functions</h2>
+				<p>Similar to variables, functions can also only be accssed from within templates.</p>
+				The Functions page has references to the build-in functions within Hugo.<br/>
+				<a href="https://gohugo.io/functions/" target="_blank">https://gohugo.io/functions/</a>
+				</section>
+
+				<section>
+				<h2>Example - Wordcount</h2>
+				<p>The wordcount function takes input and counts the words.</p>
+				<pre><code class="bash">{{ "Hugo is a static site generator." | countwords }}</code></pre>
+				</section>
+
+				<section>
+					<h2>Example - cond</h2>
+					<p>We can return text based on a condition being true or false</p>
+					<pre><code class="bash">{{ cond (eq (len $geese) 1) "goose" "geese" }}</code></pre>
+				</section>
+
+				<section>
+				<h2>Example - More Functions</h2>
+				<pre><code class="bash">{{ $geese := slice "John" }}
+There is {{ len $geese }} {{ cond (eq (len $geese) 1) "goose" "geese" }}.
+It's name is {{ index $geese 0 }}</code>
+				</section>
+
+
+				<section>
+				<h2>Getting Past Day 1</h2>
+						<ul>
+							<li>Hugo Themes</li>
+							<li>Updating Hugo</li>
+							<li>Hosting Your Site</li>
+						</ul>
+				</section>
+				<section>
+				<h2>Hugo Themes</h2>
+				<p>Themes are a great way to learn how to do something in Hugo</p>
+				<pre><code class="bash">git clone --depth 1 --recursive https://github.com/gohugoio/hugoThemes.git themes</code>
 				</section>
 				<section>
 				<h2>Updating Hugo</h2>
+				<p>Lastly, updating Hugo is as simple as replacing the executable you have in place</p>
 				</section>
 				<section>
-				<h2>Content Mangement</h2>
-					<ul>
-						<li>Markdown Primer</li>
-						<li>Creating Content</li>
-					</ul>
+				<h2>Hosting Your Site</h2>
+				<p>when you are ready to host your site, you can generate a public/ directory</p>
+				<pre><code class="bash">hugo -D</code>
 				</section>
+
 				<section>
 				<h2>Review, Closing &amp; Wrap Up</h2>
 			</section>
