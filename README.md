@@ -1,6 +1,6 @@
 # hugo-howto
 
-# Slide Deck
+# slides
 The slide deck that goes along with this tutorial in located under the slides directory.
 
 # demo_site
